@@ -1,13 +1,20 @@
+import 'package:dermatology_app/LoginScreens/signupscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-class OtpErrorscreen extends StatelessWidget {
+class OtpErrorscreen extends StatefulWidget {
+  @override
+  _OtpErrorscreenState createState() => _OtpErrorscreenState();
+}
+
+class _OtpErrorscreenState extends State<OtpErrorscreen> {
   @override
   Widget build(context) {
     return Scaffold(
         body: openErrorAlert(context)
     );
   }
+
   Widget openErrorAlert(BuildContext context) {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       Navigator.pop(context);
@@ -86,8 +93,9 @@ class OtpErrorscreen extends StatelessWidget {
                       ),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pop(context); //navigate to sigin page
-                        },
+                          Navigator.push(
+                            context, MaterialPageRoute(builder: (_) => SignupScreen()));
+                          }, //navigate to sigin page
                         child: Text("RETRY",
                           style: TextStyle(color: Color(0xffFFFFFF),fontWeight: FontWeight.bold,),
                           textAlign: TextAlign.center,

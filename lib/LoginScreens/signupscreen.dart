@@ -228,9 +228,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             _myController4.text.isEmpty)
                           print("please fill all the fields");
                         else {
-                          WidgetsBinding.instance.addPostFrameCallback((_) {
                             Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => OtpMainscreen()));
-                          });
                         }
                       },
                       color: (_myController1.text.isEmpty ||

@@ -1,13 +1,20 @@
+import 'package:dermatology_app/ProfileSetupScreens/SetProfile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-class OtpScreen extends StatelessWidget {
+class OtpScreen extends StatefulWidget {
+  @override
+  _OtpScreenState createState() => _OtpScreenState();
+}
+
+class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(context) {
     return Scaffold(
       body: openAlertBox(context)
     );
   }
+
   Widget openAlertBox(BuildContext context) {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       Navigator.pop(context);
@@ -85,10 +92,15 @@ class OtpScreen extends StatelessWidget {
                           borderRadius: BorderRadius.only(
                               bottomRight: Radius.circular(32.0)),
                         ),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context, MaterialPageRoute(builder: (_) => SetProfile()));
+                          },
                         child: Text("OKAY",
                           style: TextStyle(color: Color(0xffFFFFFF),fontWeight: FontWeight.bold,),
                           textAlign: TextAlign.center,
-
+                          ),
                         ),
                       ),
                     ),
@@ -99,5 +111,5 @@ class OtpScreen extends StatelessWidget {
           });
     });
   }
-  }
+}
 

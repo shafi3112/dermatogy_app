@@ -9,17 +9,15 @@ class OtpMainscreen extends StatefulWidget {
 }
 
 class _OtpMainscreenState extends State<OtpMainscreen> {
-  TextEditingController _myController1 = TextEditingController();
+  TextEditingController _myController5 = TextEditingController();
   @override
   void initState() {
-    _myController1.addListener(() {
-      setState(() {}); // setState every time text changes
+    _myController5.addListener(() {// setState every time text changes
     });
   }
   @override
   void dispose() {
-    _myController1.dispose();
-    super.dispose();
+    _myController5.dispose();
   }
 
   @override
@@ -110,7 +108,7 @@ class _OtpMainscreenState extends State<OtpMainscreen> {
                               height: 46.0,
                               width: 333.0,
                               child: TextFormField(
-                                controller: _myController1,
+                                controller: _myController5,
                                 //keyboardType: TextInputType.phone,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
@@ -146,7 +144,7 @@ class _OtpMainscreenState extends State<OtpMainscreen> {
                         child: ButtonTheme(
                           minWidth: 340.0,
                           height: 60.0,
-                          buttonColor: (_myController1.text.isEmpty)
+                          buttonColor: (_myController5.text.isEmpty)
                               ? Colors.blueGrey[100]
                               : Color(0xff749BAD),
                           child: Container(
@@ -162,10 +160,10 @@ class _OtpMainscreenState extends State<OtpMainscreen> {
                                 ),
                                 textColor: Colors.white,
                                 onPressed: () {
-                                  if (_myController1.text.isEmpty)
+                                  if (_myController5.text.isEmpty)
                                     print("please Enter OTP");
                                   else {
-                                    if (_myController1.text == "123456")
+                                    if (_myController5.text == "123456")
                                       WidgetsBinding.instance
                                           .addPostFrameCallback((_) {
                                         Navigator.pushReplacement(context,
