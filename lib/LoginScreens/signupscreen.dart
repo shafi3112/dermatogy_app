@@ -33,14 +33,14 @@ class _SignupScreenState extends State<SignupScreen> {
     });
   }
 
-  @override
+  /*@override
   void dispose() {
     _myController1.dispose();
     _myController2.dispose();
     _myController3.dispose();
     _myController4.dispose();
     super.dispose();
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -228,7 +228,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             _myController4.text.isEmpty)
                           print("please fill all the fields");
                         else {
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => OtpMainscreen()));
+                            Navigator.push(context, MaterialPageRoute(builder: (_) => OtpMainscreen()));
                         }
                       },
                       color: (_myController1.text.isEmpty ||

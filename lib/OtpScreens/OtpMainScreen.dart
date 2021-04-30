@@ -3,22 +3,17 @@ import 'package:dermatology_app/OtpScreens/OtpSuccessScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-class OtpMainscreen extends StatefulWidget {
-  @override
-  _OtpMainscreenState createState() => _OtpMainscreenState();
-}
-
-class _OtpMainscreenState extends State<OtpMainscreen> {
+class OtpMainscreen extends StatelessWidget {
   TextEditingController _myController5 = TextEditingController();
   @override
   void initState() {
     _myController5.addListener(() {// setState every time text changes
     });
   }
-  @override
+  /*@override
   void dispose() {
     _myController5.dispose();
-  }
+  }*/
 
   @override
   Widget build(context) {
@@ -26,9 +21,10 @@ class _OtpMainscreenState extends State<OtpMainscreen> {
       body: bottomscreen(context)
     );
   }
-  Widget bottomscreen(BuildContext context)
+  Widget bottomscreen(context)
   {
     SchedulerBinding.instance.addPostFrameCallback((_) {
+      Navigator.of(context).pop();
       showModalBottomSheet(
         context: context,
         shape: RoundedRectangleBorder(

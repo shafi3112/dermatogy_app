@@ -1,3 +1,4 @@
+import 'package:dermatology_app/ErrorAlert/Notification_Disabled.dart';
 import 'package:dermatology_app/LoginScreens/signupscreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -132,16 +133,16 @@ class WelcomeScreen extends StatelessWidget {
                         ),
                       SizedBox(
                         height: 70,
-                      ),
+                      ), //navigate to sigin pag
                       Text('Privacy Policy . Terms and Conditions',
-                        style: TextStyle(
+                          style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 10.0,
                             color: Color(0xff749BAD)
                         ),)
-                ],
+                    ],
                   ),
-            ),
+               ),
               ),
           ],
         ),

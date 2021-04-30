@@ -1,4 +1,4 @@
-import 'package:dermatology_app/LoginScreens/signupscreen.dart';
+import 'package:dermatology_app/OtpScreens/OtpMainScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -93,8 +93,9 @@ class _OtpErrorscreenState extends State<OtpErrorscreen> {
                       ),
                       child: GestureDetector(
                         onTap: () {
+                          Navigator.of(context).pop();
                           Navigator.push(
-                            context, MaterialPageRoute(builder: (_) => SignupScreen()));
+                            context, MaterialPageRoute(builder: (_) => OtpMainscreen()));
                           }, //navigate to sigin page
                         child: Text("RETRY",
                           style: TextStyle(color: Color(0xffFFFFFF),fontWeight: FontWeight.bold,),
