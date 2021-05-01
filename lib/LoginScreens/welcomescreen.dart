@@ -1,4 +1,3 @@
-import 'package:dermatology_app/ErrorAlert/Notification_Disabled.dart';
 import 'package:dermatology_app/LoginScreens/signupscreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

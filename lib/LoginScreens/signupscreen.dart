@@ -103,6 +103,10 @@ class _SignupScreenState extends State<SignupScreen> {
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Enter Number',
+                    hintStyle: TextStyle(
+                      color: Color(0xff02122C),
+                      fontSize: 12.0,
+                    ),
                   ),
                 ),
               ),
@@ -122,6 +126,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Enter Email',
+                      hintStyle: TextStyle(
+                        color: Color(0xff02122C),
+                        fontSize: 12.0,
+                      ),
                     ),
                     onChanged: (val) {
                       // setState(() => email = val);
@@ -145,6 +153,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Enter Password',
+                      hintStyle: TextStyle(
+                        color: Color(0xff02122C),
+                        fontSize: 12.0,
+                      ),
                       suffixIcon:
                       IconButton(
                           icon: Icon(
@@ -186,6 +198,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Confirm Password',
+                      hintStyle: TextStyle(
+                        color: Color(0xff02122C),
+                        fontSize: 12.0,
+                      ),
                       suffixIcon:
                       IconButton(
                           icon: Icon(
