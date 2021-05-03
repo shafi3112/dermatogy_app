@@ -1,5 +1,9 @@
+import 'package:dermatology_app/ProfileSetupScreens/Gender.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
+import 'Gender.dart';
 
 class SetProfile extends StatefulWidget {
   @override
@@ -7,7 +11,11 @@ class SetProfile extends StatefulWidget {
 }
 
 class _SetProfileState extends State<SetProfile> {
+  List<Gender> genders = new List<Gender>();
   DateTime _selectedDate;
+  Position _currentPosition;
+  String _currentAddress;
+  bool Genderselected= false;
   TextEditingController _myController1 = TextEditingController();
   TextEditingController _myController2 = TextEditingController();
   TextEditingController _myController3 = TextEditingController();
@@ -19,6 +27,9 @@ class _SetProfileState extends State<SetProfile> {
   @override
   void initState() {
     super.initState();
+    genders.add(new Gender("Male",'asset/images/male.png' , false));
+    genders.add(new Gender("Female",'asset/images/female.png' , false));
+    genders.add(new Gender("Others",'asset/images/other.png' , false));
     _myController1.addListener(() {
       setState(() {}); // setState every time text changes
     });
@@ -50,27 +61,9 @@ class _SetProfileState extends State<SetProfile> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         leading: Container(
-          child: Center(
-            child: SizedBox(
-              width: 35.0,
-              height: 48.0,
-              child: DecoratedBox(
-                child: Column(
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.arrow_back_ios, color: Color(0xff02122C)),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                      color: Color(0xff02122C)
-                  ),
-                ),
-              ),
-            ),
-          ),
+          child: GestureDetector(
+              onTap: () => Navigator.of(context).pop(),
+              child: Image.asset('asset/images/arrow_back.png')),
         ),
         title: Text("Setup Profile",
           style: TextStyle(
@@ -145,125 +138,27 @@ class _SetProfileState extends State<SetProfile> {
                 ),
               ),
               SizedBox(height: 10.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment. spaceEvenly,
-                  children: [
-                    Container(
-                      width: 101.0,
-                      height: 91.0,
-                      child: Column(
-                        children: [
-                          SizedBox(height: 15.0),
-                          Center(
-                            child: Container(
-                                width: 26.0,
-                                height: 36.0,
-                                child: Image.asset('asset/images/male.png'),),
-                          ),
-                          SizedBox(height: 10.0),
-                          Center(
-                            child: Container(
-                                width: 30.0,
-                                height: 17.0,
-                                child: Text("Male",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12.0,
-                                      color: Color(0xff02122C)
-                                  ),)),
-                          ),
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Color(0xff143A4C)),
-                        color: Color(0xffB2BFB8),
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(0.0),
-                            topLeft:  Radius.circular(20.0),
-                            bottomLeft: Radius.circular(0.0),
-                            bottomRight: Radius.circular(20.0)
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 101.0,
-                      height: 91.0,
-                      child: Column(
-                        children: [
-                          SizedBox(height: 15.0),
-                          Center(
-                            child: Container(
-                              width: 23.0,
-                              height: 35.0,
-                              child: Image.asset('asset/images/female.png'),),
-                          ),
-                          SizedBox(height: 10.0),
-                          Center(
-                            child: Container(
-                                width: 46.0,
-                                height: 17.0,
-                                child: Text("Female",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12.0,
-                                      color: Color(0xff02122C)
-                                  ),)),
-                          ),
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Color(0xff143A4C)),
-                        color: Color(0xffB2BFB8),
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(0.0),
-                            topLeft:  Radius.circular(20.0),
-                            bottomLeft: Radius.circular(0.0),
-                            bottomRight: Radius.circular(20.0)
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 101.0,
-                      height: 91.0,
-                      child: Column(
-                        children: [
-                          SizedBox(height: 15.0),
-                          Center(
-                            child: Container(
-                              width: 30.0,
-                              height: 35.0,
-                              child: Image.asset('asset/images/other.png'),),
-                          ),
-                          SizedBox(height: 10.0),
-                          Center(
-                            child: Container(
-                                width: 35.0,
-                                height: 17.0,
-                                child: Text("Other",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12.0,
-                                      color: Color(0xff02122C)
-                                  ),)),
-                          ),
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Color(0xff143A4C)),
-                        color: Color(0xffB2BFB8),
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(0.0),
-                            topLeft:  Radius.circular(20.0),
-                            bottomLeft: Radius.circular(0.0),
-                            bottomRight: Radius.circular(20.0)
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              Container(
+                height: 110.0,
+                width: 335.0,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  itemCount: genders.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      splashColor: Colors.pinkAccent,
+                      onTap: () {
+                        setState(() {
+                          genders.forEach((gender) => gender.isSelected = false);
+                          genders[index].isSelected = true;
+                          Genderselected= true;
+                      });
+                    },
+                    child: CustomRadio(genders[index]),
+                  );
+                }),
+              ),
               SizedBox(height: 30.0),
               Text('Date of Birth',
                 style: TextStyle(
@@ -355,19 +250,27 @@ class _SetProfileState extends State<SetProfile> {
                         child:IconButton(
                             icon: Icon(Icons.my_location_sharp),
                             onPressed: () {
-                              setState(() {});
+                              _getCurrentLocation();
+                              setState(() {
+                                if (_currentAddress != null) {
+                                  _myController5.text= (_currentAddress);
+                                }
+                              });
                             }),
                   ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(),
                     child: Container(
+                      child: GestureDetector(
+                          onTap: () {},
                         child: Text("Use Current Location",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               decoration: TextDecoration.underline,
                               fontSize: 12.0,
-                              color: Color(0xff25414A)),)),
+                              color: Color(0xff699CAF)),)),
+                    ),
                   ),
                 ],
               ),
@@ -541,14 +444,17 @@ class _SetProfileState extends State<SetProfile> {
                   onPressed: () {
                     if (_myController1.text.isEmpty || _myController2.text
                         .isEmpty || _myController3.text.isEmpty ||
-                        _myController4.text.isEmpty)
+                        _myController4.text.isEmpty || _myController5.text.isEmpty || _myController6.text
+                        .isEmpty || _myController7.text.isEmpty ||
+                        _myController8.text.isEmpty || Genderselected ==false)
                       print("please fill all the fields");
                     else {}
                     },
-                  color: (_myController1.text.isEmpty ||
-                            _myController2.text.isEmpty ||
-                            _myController3.text.isEmpty ||
-                            _myController4.text.isEmpty)
+                  color: _myController1.text.isEmpty || _myController2.text
+                      .isEmpty || _myController3.text.isEmpty ||
+                      _myController4.text.isEmpty || _myController5.text.isEmpty || _myController6.text
+                      .isEmpty || _myController7.text.isEmpty ||
+                      _myController8.text.isEmpty || Genderselected ==false
                             ? Colors.blueGrey[100]
                             : Color(0xff749BAD)
                     ),
@@ -583,12 +489,40 @@ class _SetProfileState extends State<SetProfile> {
     if (newSelectedDate != null) {
       _selectedDate = newSelectedDate;
       _myController3
-        ..text = DateFormat.yMd().format(_selectedDate)
+        ..text = DateFormat('dd-MM-yyyy').format(_selectedDate)
         ..selection = TextSelection.fromPosition(TextPosition(
             offset: _myController3.text.length,
             affinity: TextAffinity.upstream));
     }
 
+  }
+  void _getCurrentLocation() {
+    Geolocator
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      setState(() {
+        _currentPosition = position;
+        _getAddressFromLatLng();
+      });
+    }).catchError((e) {
+      print(e);
+    });
+  }
+  _getAddressFromLatLng() async {
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+          _currentPosition.latitude,
+          _currentPosition.longitude
+      );
+
+      Placemark place = placemarks[0];
+
+      setState(() {
+        _currentAddress = "${place.locality}, ${place.postalCode}, ${place.country}";
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 }
 
