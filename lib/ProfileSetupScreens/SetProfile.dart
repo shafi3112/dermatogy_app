@@ -61,6 +61,8 @@ class _SetProfileState extends State<SetProfile> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         leading: Container(
+          height: 20.0,
+          width: 20.0,
           child: GestureDetector(
               onTap: () => Navigator.of(context).pop(),
               child: Image.asset('asset/images/arrow_back.png')),

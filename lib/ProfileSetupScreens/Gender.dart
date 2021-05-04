@@ -21,19 +21,26 @@ class _CustomRadioState extends State<CustomRadio> {
   bool value = false;
   @override
   Widget build(BuildContext context) {
+    String _backgroundImage;
+    String setImage() {
+      if(widget._gender.isSelected == true)
+        _backgroundImage = "asset/images/checked.png";
+      else
+        _backgroundImage = "asset/images/unchecked.png";
+      return _backgroundImage;
+    }
     return Card(
-        color: widget._gender.isSelected ? Color(0xFFB2BFB8) : Colors.white,
         child: Container(
           height: 95.0,
           width: 101.0,
           decoration: BoxDecoration(
-            border: Border.all(color: Color(0xffE5E7E9)),
-            //color: Color(0xffFFFFFF),
+            border: Border.all(color: widget._gender.isSelected ? Color(0xFF143A4C) : Color(0xFFE5E7E9)),
+            color: widget._gender.isSelected ? Color(0xFFB2BFB8) : Color(0xFFFFFFFF),
             borderRadius: BorderRadius.only(
                 topRight: Radius.circular(0.0),
                 topLeft:  Radius.circular(20.0),
                 bottomLeft: Radius.circular(0.0),
-                bottomRight: Radius.circular(10.0)
+                bottomRight: Radius.circular(20.0)
             ),
           ),
           child: Column(
@@ -42,19 +49,13 @@ class _CustomRadioState extends State<CustomRadio> {
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
-                    child: Checkbox(
-                      checkColor: Color(0xff749BAD),
-                      activeColor: Color(0xffFFFF),
-                      value: this.value,
-                      onChanged: (bool value) {
-                        setState(() {
-                          this.value = value;
-                          widget._gender.isSelected = value;
-                        });
-                      },
-                    ),
+                    padding: const EdgeInsets.only(left: 60.0),
+                      child: Container(
+                          width: 30,
+                          height: 30,
+                          child: Image.asset(setImage()))
                   ),
+
                 ],
               ),
               Padding(
