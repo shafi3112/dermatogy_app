@@ -2,6 +2,8 @@ import 'package:dermatology_app/LoginScreens/signupscreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'SignIn.dart';
+
 class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -127,7 +129,10 @@ class WelcomeScreen extends StatelessWidget {
                                     side: BorderSide(color: Colors.blueGrey[500]),
                                   ),
                                   textColor: Colors.white,
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context, MaterialPageRoute(builder: (_) => SignInPage()));
+                                  },
                                 ),
                               ),
                             ),

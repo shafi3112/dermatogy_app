@@ -159,8 +159,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                 ),
               ),
-            Padding(
-              padding: const EdgeInsets.only(top: 60.0),
+            Padding( padding: const EdgeInsets.only(top: 60.0),
               child: Center(
                 child: Container(
                     width: MediaQuery.of(context).size.width,
@@ -172,11 +171,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),)),
               ),
             ),
-            SizedBox(
-              height: 60,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            SizedBox(height: 60,),
+            Row( mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text("Existing User?",style: TextStyle(fontWeight: FontWeight.w600,
                     fontSize: 18.0,
@@ -191,11 +187,9 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 50,
-            ),
+            SizedBox(height: 50,),
             Center(
-            child: Text('Privacy Policy . Terms and Conditions',
+             child: Text('Privacy Policy . Terms and Conditions',
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                   fontSize: 13.0,
@@ -203,13 +197,10 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
             ),
             ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 20,),
           ],
         ),
       ),
-
       ),
     );
   }
