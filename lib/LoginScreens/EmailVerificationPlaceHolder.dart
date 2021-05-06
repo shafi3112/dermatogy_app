@@ -101,7 +101,7 @@ class _EmailVerificationPlaceHolderState extends State<EmailVerificationPlaceHol
                   width: 335.0,
                   height: 50.0,
                   child: RaisedButton(
-                    child: Text('ENABLE LOCATION',
+                    child: Text('RESEND MAIL',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15.0,

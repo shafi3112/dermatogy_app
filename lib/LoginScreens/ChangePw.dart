@@ -1,4 +1,5 @@
 import 'package:dermatology_app/LoginScreens/EmailVerificationPlaceHolder.dart';
+import 'package:dermatology_app/LoginScreens/PwSuccess.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
@@ -128,12 +129,12 @@ class _changePasswordState extends State<changePassword> {
                         ),
                       ),
                       onPressed: () async {
-                        /*if (formkey.currentState.validate()) {
-                          //PasswordChecker();
-                        }*/
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => EmailVerificationPlaceHolder()),
-                        );
+                        if (_pwController1.text.isEmpty || _pwController2.text
+                            .isEmpty)
+                          print("please fill all the fields");
+                        else {
+                          Navigator.push(context, MaterialPageRoute(builder: (_) => PwSuccess()));
+                        }
                       }),
                 ),
               ],
