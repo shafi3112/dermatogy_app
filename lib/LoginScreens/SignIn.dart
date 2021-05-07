@@ -9,8 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:http/http.dart' as http;
 
-
-
 class SignInPage extends StatefulWidget {
   @override
   _SignInPageState createState() => _SignInPageState();
@@ -19,6 +17,7 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   bool _passwordVisible = true;
+  var code;
   bool ignoring = false;
   bool _isfilled = false;
   bool biometricsAvailable = true;
@@ -53,30 +52,7 @@ class _SignInPageState extends State<SignInPage> {
     });
   }
 
-  Future PasswordChecker() async{
-    var APIURL=Uri.parse("http://65.0.55.180/skinmate/v1.0/api/init");
-    Map mapeddata ={
-      'id' : _idController.text,
-      'password' : _pwController.text,
-    };
-    print("JSON DATA: ${mapeddata}");
-    http.Response response= await http.post(APIURL,body:mapeddata);
-    var data =jsonDecode(response.body);
-    print("DATA:${data}");
-    var code=(data[0]['code']);
-    print(code);
-    /*if(code==205)
-    {
-      final snackBar = SnackBar(
-        content: Text('Invalid Username or password'),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-    else
-      //Navigator.push(context, MaterialPageRoute(builder: (_) => OtpMainscreen()));
-  }*/
 
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -175,7 +151,7 @@ class _SignInPageState extends State<SignInPage> {
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => changePassword()),
+                                MaterialPageRoute(builder: (context) => forgotPassword()),
                               );
                             },
                           style: TextStyle( fontFamily: 'Poppins-SemiBold',
@@ -296,5 +272,28 @@ class _SignInPageState extends State<SignInPage> {
         ),
       ),
     );
+  }
+
+  Future PasswordChecker() async {
+    var APIURL = Uri.parse("http://65.0.55.180/skinmate/v1.0/customer/login");
+    Map mapeddata = {
+      'id': _idController.text,
+      'password': _pwController.text,
+    };
+    print("JSON DATA: ${mapeddata}");
+    http.Response response = await http.post(APIURL, body: mapeddata);
+    var data = jsonDecode(response.body);
+    print("DATA: ${data}");
+    var code = (data['Code']);
+    if(code == 200)
+    {
+      print('valid');
+      Navigator.push(context, MaterialPageRoute(builder: (_) => homePage()));
+    }
+    else {
+      final snackBar = SnackBar(
+        content: Text('Invalid Email or Password'),);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 }

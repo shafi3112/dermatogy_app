@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:dermatology_app/LoginScreens/EmailVerificationPlaceHolder.dart';
 import 'package:dermatology_app/LoginScreens/PwSuccess.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,7 @@ class changePassword extends StatefulWidget {
 
 class _changePasswordState extends State<changePassword> {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  var code;
   TextEditingController _pwController1 = TextEditingController();
   TextEditingController _pwController2 = TextEditingController();
   bool _passwordVisible = true;
@@ -133,7 +136,8 @@ class _changePasswordState extends State<changePassword> {
                             .isEmpty)
                           print("please fill all the fields");
                         else {
-                          Navigator.push(context, MaterialPageRoute(builder: (_) => PwSuccess()));
+                          passwordChangeAPI();
+                          //Navigator.push(context, MaterialPageRoute(builder: (_) => PwSuccess()));
                         }
                       }),
                 ),
@@ -143,5 +147,26 @@ class _changePasswordState extends State<changePassword> {
         ),
       ),
     );
+  }
+
+  Future passwordChangeAPI() async{
+    var APIURL=Uri.parse("http://65.0.55.180/skinmate/v1.0/customer/update-password");
+    Map mapeddata ={
+      'password' : _pwController2.text, };
+    print("JSON DATA: ${mapeddata}");
+    http.Response response= await http.post(APIURL,body:mapeddata);
+    var data =jsonDecode(response.body);
+    print("DATA:${data}");
+    var code=(data['Code']);
+    //print(code);
+    if(code!=200)
+    {
+      final snackBar = SnackBar(
+        content: Text('Unable to update password, please try again!'),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+    else
+      Navigator.push(context, MaterialPageRoute(builder: (_) => PwSuccess()));
   }
 }

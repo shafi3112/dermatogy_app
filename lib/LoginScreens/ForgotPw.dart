@@ -1,6 +1,9 @@
+import 'package:dermatology_app/models/OtpScreens/EmailOtpScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class forgotPassword extends StatefulWidget {
   @override
@@ -8,6 +11,7 @@ class forgotPassword extends StatefulWidget {
 }
 
 class _forgotPasswordState extends State<forgotPassword> {
+  var code;
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   TextEditingController _idController = TextEditingController();
   @override
@@ -78,11 +82,10 @@ class _forgotPasswordState extends State<forgotPassword> {
                             side: BorderSide(color: Colors.blueGrey[100]),
                           ),
                         ),
-                        onPressed: ()  {
-                          /*SchedulerBinding.instance.addPostFrameCallback((_) {
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (_) => OtpMainscreen()));
-                          }); */
+                        onPressed: () async {
+                          if (formkey.currentState.validate()) {
+                            EmailOtpApi();
+                          }
                         }),
                   ),
                 ],
@@ -94,4 +97,22 @@ class _forgotPasswordState extends State<forgotPassword> {
     );
   }
 
+  Future EmailOtpApi() async {
+    var APIURL = Uri.parse("http://65.0.55.180/skinmate/v1.0/customer/registration-send-otp-to-email");
+    Map mapeddata = {
+      'email': _idController.text,};
+    print("JSON DATA: ${mapeddata}");
+    http.Response response = await http.post(APIURL, body: mapeddata);
+    var data = jsonDecode(response.body);
+    print("DATA:${data}");
+    var code = (data[0]['Code']);
+    print(code);
+    if (code == 200) {
+      OtpEmailScreen(context);
+    }
+    else{
+      final snackBar = SnackBar(content: Text('Invalid Email'),);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
 }
